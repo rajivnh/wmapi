@@ -1,0 +1,14 @@
+server:
+  port: 81
+
+spring:
+  application:
+    name: wmapi
+  webflux:
+    base-path: /wmapi
+    
+eureka:
+  client:
+    region: default
+    service-url:
+      defaultZone: http://127.0.0.1:83/eureka    

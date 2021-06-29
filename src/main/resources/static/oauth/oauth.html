@@ -1,0 +1,36 @@
+
+<table>
+	<tr>
+		<td class='dochdr'>OAUTH2 JWT TOKEN</td>
+	</tr>
+	<tr>
+		<td>EndPoint URL: <a href='javascript:invoke()' class='trans bclr' name='oauth'><span class=host></span>/oauth</a><br></td>
+	</tr>
+	<tr>
+		<td>
+			<br>
+			Request Method: POST<br>
+			Response Status: 200, 400 <br><br>
+		</td>
+	</tr>		
+	<tr>
+		<td>
+			Description: <br><br>
+		</td>
+	</tr>	
+	<tr>
+		<td>
+			WM APIs are Oauth2 protected cannot be accessed directly. <br>
+			In order to access the API a JWT token must be obtained and passed in the request header ("X-AUTH-TOKEN": "[JWT_TOKEN]") or in the request param (token=[JWT_TOKEN]).
+		</td>
+	</tr>
+</table>
+
+<script>
+	function invoke() {
+		var top = (screen.height/2)-(720/2);
+		var left = (screen.width/2)-(800/2);
+
+		window.open("/wmapi/oauth/oauthworker.html?token=" +  token, "wmapi", "toolbar=no,scrollbars=yes,resizable=yes,width=800,height="+(screen.height-216)+",top="+top+",left="+left);
+	}	
+</script>

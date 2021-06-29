@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" >
+	<head>
+		<meta charset="UTF-8">
+		<title>HASH PASSWORD</title>
+		<link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap" rel="stylesheet">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<style>
+			*{
+				font-family:'PT Sans Narrow', sans-serif;
+			}
+			body {
+			  background:#3D3C3C;
+			  margin:0px;
+			}
+			.dochdr {
+				background:#3D3C3C;
+				font-size: 18px;
+			}
+			td {
+				font-size:16px;
+				border:0px solid #e2e2e2;
+				padding:5px 20px 5px 20px;
+				color:#f4f4f4;
+			}
+			input {
+				font-size:16px;
+				width:100%;
+				background:#3D3C3C;
+				color:#f4f4f4;
+			}
+			textarea {
+				width:100%;
+				background:#3D3C3C;
+				color:#99c8f8;
+			}
+			#invokeBut {
+				font-size:18px;
+				padding:5px 30px 5px 30px;
+				background:#3D3C3C;
+				color:#f4f4f4;
+			}
+		</style>
+		<script>
+			function invoke() {
+				Spinner.show();
+				
+				document.getElementById("invokeBut").disabled = true;
+				
+				$('#responseData').val('');
+				$('.httpstatus').html('');
+				$('.httpstatus').removeClass('http200 httperr');
+	
+				$.ajax({
+					type: 'POST',
+					url: $('#endpoint').val(),
+					contentType: 'application/json; charset=utf-8',
+					headers: {"X-AUTH-TOKEN": $.urlParam('token'), "Accept" : "application/json"},
+					data: $('#requestData').val(),
+					async: true,
+					success: function(result) {		
+						Spinner.hide();
+						
+						$('.httpstatus').html('200 OK');
+						$('.httpstatus').addClass('http200');
+
+						document.getElementById("invokeBut").disabled = false;
+						
+						$('#responseData').val(JSON.stringify(result, null, 2));
+					},
+					error: function(result, textStatus, errorThrown) {
+						Spinner.hide();
+						
+						if(result.status != 200) {
+							$('.httpstatus').html(result.status + ' ' + errorThrown);
+							$('.httpstatus').addClass('httperr');						
+						}
+
+						$('#responseData').val(JSON.stringify(JSON.parse(result.responseText), null, 2));
+
+						document.getElementById("invokeBut").disabled = false; 
+					}
+				});
+			}
+			
+			$.urlParam = function(name) {
+			    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+			    
+			    if(results==null) {
+			       return null;
+			    }
+			    
+			    return decodeURI(results[1]) || 0;
+			}
+			
+			var Spinner = {
+				show: function(obj) {
+					$("body").append(Spinner.html(obj));
+					$('div.spinner').fadeIn(1000);
+				},
+				hide: function() {
+					$('div.spinner').fadeOut(10);
+				},
+				html: function(obj) {
+					var position = 'top:'+((window.innerHeight/2)-80)+'px;left:'+((window.innerWidth/2)-40)+'px;';
+
+					return '<div class="spinner"><style>.spinner-circle{opacity:1;height:80px;width:80px;min-width:80px;min-height:80px;transform-origin:40px 40px 40px;transition:.5s;animation:spinnerAnimation 1.3s infinite cubic-bezier(.53,.21,.29,.67)}@keyframes spinnerAnimation{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}.spinner{position:fixed;'+position+'width:80px;height:80px;padding:10px 20px 0px 0px;z-index:9999;display:none}</style><svg class="spinner-circle" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 80 80"><defs><path id="a" d="M0 0h40v40H0z"/></defs><g fill="none" fill-rule="evenodd"><circle cx="40" cy="40" r="38" stroke="#DEECF9" stroke-width="2.817"/><g transform="translate(40)"><mask id="b" fill="#fff"><use xlink:href="#a"/></mask><circle cy="40" r="38" stroke="#0078D7" stroke-width="2.817" mask="url(#b)"/></g></g></svg></div>';
+				}
+			};			
+
+			$(document).ready(function () {
+				$('#endpoint').val(document.location.origin + '/cryptography/api/hashpw');
+			});			
+		</script>		
+	</head>
+<body>
+	<table style='width:100%'>
+		<tr>
+			<td class='dochdr'>HASH PASSWORD</td>
+		</tr>
+		<tr>
+			<td><input type='text' id='endpoint' placeholder='Endpoint URL' value=''></td>
+		</tr>
+		<tr>
+			<td>Request:</td>
+		</tr>
+		<tr>
+			<td>
+				<textarea id='requestData' rows='4'>
+{
+  "text": "secret"
+}
+				</textarea>
+			</td>
+		</tr>
+		<tr>
+			<td>Response: <span class='httpstatus'></span></td>
+		</tr>
+		<tr>
+			<td>
+				<textarea id='responseData' rows='20'></textarea>
+			</td>
+		</tr>		
+		<tr>
+			<td align='center'><button type="button" id='invokeBut' onclick='invoke()'>INVOKE</button></td>
+		</tr>		
+	</table>
+</body>
+</html>

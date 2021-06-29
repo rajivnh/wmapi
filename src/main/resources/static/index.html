@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en" >
+	<head>
+		<meta charset="UTF-8">
+		<title>Wealth Transfer Api</title>
+		<link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap" rel="stylesheet">
+		<style>
+			*{
+				font-family:'PT Sans Narrow', sans-serif;
+			}
+			body {
+			  background:#222;
+			  margin:0px;
+			}
+			.accordion {
+			  width:100%;
+			  list-style:none;
+			  padding:0;
+			  margin:0;
+			}
+			li {
+			  display:flex;
+			  flex-direction:column;
+			}
+			li + li {
+			  border-top:1px solid white;
+			}
+			.accordion-control {
+			  text-align:left;
+			  font-size:15px;
+			  font-family:'PT Sans Narrow';
+			  background:#000;
+			  color:white;
+			  border:none;
+			  padding:5px;
+			  cursor:pointer;
+			  width:100%;
+			}
+			.accordion-panel {
+			  padding:5px 5px 5px 5px;
+			  background:#444;
+			  color:#f4f4f4;
+			  display:none;			  
+			  font-size:14px;
+			}
+			a.trans {
+			  position:relative;
+			  text-decoration:none;
+			  cursor:pointer;
+			}
+			a.trans:hover {
+			  color:#a8a8a8;
+			}
+			a.trans::before {
+			  content:"";
+			  position:absolute;
+			  width:100%;
+			  height:1px;
+			  bottom:0;
+			  left:0;
+			  background-color:#a8a8a8;
+			  visibility:hidden;
+			  transform:scaleX(0);
+			  transition:all 0.3s ease-in-out 0s;
+			}
+			a.trans:hover::before {
+			  visibility:visible;
+			  transform:scaleX(1);
+			}
+			.highlight {
+				color:#58A6FF;
+				font-weight:bold;
+			}
+			table td {
+				color:#f4f4f4;
+				font-family:'PT Sans Narrow';
+			}
+			.dochdr {
+				font-size:20px;
+				padding-bottom:10px;
+				cursor:pointer;
+			}
+			.bclr {
+				color:#58A6FF;
+			}
+			pre {
+				color:#99c8f8;
+			}
+		</style>
+	</head>
+
+<body>
+	<div style='height:44px;background:#3D3C3C;clear:both'>
+		<table style='width:100%'>
+			<tr>
+				<td style='padding-left:10px;padding-top:5px'>
+					<img src='wmapi/im/wm.jpg'>
+				</td>
+				<td align=right style='padding-right:20px'>
+					<img src='wmapi/im/hcl.png' width=120>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<table style='width:100%'>
+		<tr>
+			<td width='14%' valign=top>
+				<ul class="accordion">
+					<li>
+						<button class="accordion-control oauthbut">OAUTH</button>
+						<div class="accordion-panel">
+							<a onclick='Doc.open("oauth/oauth", "oauth")' class='trans highlight'>OAUTH JWT TOKEN</a>
+						</div>
+					</li>
+					<li>
+						<button class="accordion-control">CRYPTOGRAPHY</button>
+						<div class="accordion-panel">
+							<table>
+								<tr>
+									<td>
+										<a onclick='Doc.open("crypto/crypto", "encrypt")' class=trans>ENCRYPTION</a>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a onclick='Doc.open("crypto/crypto", "decrypt")' class=trans>DECRYPTION</a>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a onclick='Doc.open("crypto/crypto", "hashpw")' class=trans>PASSWORD HASHING</a>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a onclick='Doc.open("crypto/crypto", "checkpw")' class=trans>CHECK PASSWORD</a>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</li>
+					<li>
+						<button class="accordion-control">DROP-DOWN</button>
+						<div class="accordion-panel">
+							<a class=trans>DROP-DOWN LIST (DDL)</a>
+						</div>
+					</li>
+					<li>
+						<button class="accordion-control">QUOTE</button>
+						<div class="accordion-panel">
+							<table>
+								<tr>
+									<td>
+										<a class=trans>GENERATE QUOTE</a>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a class=trans>RETRIVE QUOTE</a>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a class=trans>CONVERT QUOTE</a>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a class=trans>APPLICATION</a>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a class=trans>PAY PLAN</a>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a class=trans>MAKE PAYMENT</a>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</li>
+					<li>
+						<button class="accordion-control">PAYMENT</button>
+						<div class="accordion-panel">
+							<table>
+								<tr>
+									<td>
+										<a class=trans>ADD PAYMENT</a>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a class=trans>DELETE PAYMENT</a>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a class=trans>MAKE PAYMENT</a>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a class=trans>PAYMENT LIST</a>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</li>
+					<li>
+						<button class="accordion-control">MANAGE DOCUMENT</button>
+						<div class="accordion-panel">
+							<table>
+								<tr>
+									<td>
+										<a class=trans>ADD DOCUMENT</a>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a class=trans>DELETE DOCUMENT</a>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a class=trans>VIEW DOCUMENTS</a>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</li>
+					<li>
+						<button class="accordion-control">EXTENTION</button>
+						<div class="accordion-panel"><a class=trans>OFAC VERIFICATION</a></div>
+					</li>
+				</ul>
+			</td>
+			<td width='86%' class='workspace' valign=top style='padding:5px 20px 20px 20px'>
+				
+			</td>
+		</tr>
+	</table>
+
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+
+	<script>
+		var token = '';
+		
+		$('body').on('click','.dochdr', function() {
+			$('html,body').animate({scrollTop: 0}, 'slow');
+	    })
+		
+		$('.accordion').on('click', '.accordion-control', function (e) {
+			e.preventDefault(); 
+
+			$(this).next('.accordion-panel').not(':animated').slideToggle();
+		});
+
+		$(document).ready(function() {
+			$(".accordion a").click(function (e) { 
+				$('.accordion').find('a').removeClass("highlight");
+
+				$(this).addClass('highlight');
+			});
+
+			$('.oauthbut').click();
+
+			var req = new XMLHttpRequest();
+			
+			req.open('GET', document.location, false);
+			req.send(null);
+			
+			token = req.getResponseHeader('X-AUTH-TOKEN');
+			
+			Doc.open('oauth/oauth', 'oauth');
+		});
+
+		var Spinner = {
+			show: function(obj) {
+				$("body").append(Spinner.html(obj));
+				$('div.spinner').fadeIn(1000);
+			},
+			hide: function() {
+				$('div.spinner').fadeOut(10);
+			},
+			html: function(obj) {
+				var position = 'top:'+((window.innerHeight/2)-80)+'px;left:'+((window.innerWidth/2)-40)+'px;';
+
+				return '<div class="spinner"><style>.spinner-circle{opacity:1;height:80px;width:80px;min-width:80px;min-height:80px;transform-origin:40px 40px 40px;transition:.5s;animation:spinnerAnimation 1.3s infinite cubic-bezier(.53,.21,.29,.67)}@keyframes spinnerAnimation{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}.spinner{position:fixed;'+position+'width:80px;height:80px;padding:10px 20px 0px 0px;z-index:9999;display:none}</style><svg class="spinner-circle" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 80 80"><defs><path id="a" d="M0 0h40v40H0z"/></defs><g fill="none" fill-rule="evenodd"><circle cx="40" cy="40" r="38" stroke="#DEECF9" stroke-width="2.817"/><g transform="translate(40)"><mask id="b" fill="#fff"><use xlink:href="#a"/></mask><circle cy="40" r="38" stroke="#0078D7" stroke-width="2.817" mask="url(#b)"/></g></g></svg></div>';
+			}
+		};
+
+		var pageId = '';
+		
+		var Doc = {
+			open: function(pageId, aid) {
+				if(Doc.getPageId() == pageId) {
+					Doc.scrollToAnchor(aid);
+					
+					return;
+				}
+				
+				Spinner.show();	
+				
+				$.ajax({
+					type: 'GET',
+					url: 'wmapi/' + pageId + '.html',
+					headers: {'X-AUTH-TOKEN': 'Bearer ' + token},
+					async: true,
+					success: function(result) {	
+						Spinner.hide();
+
+						$('.workspace').html(result);
+						
+						Doc.setHost();
+						Doc.setPageId(pageId);
+						Doc.scrollToAnchor(aid);
+					},
+					error: function(result, textStatus, errorThrown) {
+						Spinner.hide();
+						
+						$('.workspace').html(result.responseText);
+					}
+				});				
+			}, 
+			setHost: function() {
+				$('.host').html(document.location.origin);
+			},
+			getPageId: function() {
+				return pageId;
+			},
+			setPageId: function(pid) {
+				pageId = pid;
+			},
+			scrollToAnchor: function(aid) {
+			    var aTag = $("a[name='"+ aid +"']");
+			    
+			    $('html,body').animate({scrollTop: aTag.offset().top - 55}, 'slow');				
+			}			
+		};
+	</script>
+</body>
+</html>
