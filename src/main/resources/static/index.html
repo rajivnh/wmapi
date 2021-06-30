@@ -88,7 +88,10 @@
 			}
 		</style>
 	</head>
-
+	<script>
+		if(document.location.href.endsWith("wmapi/"))
+			document.location.href = document.location.href.substring(0, document.location.href.length - 1);
+	</script>
 <body>
 	<div style='height:44px;background:#3D3C3C;clear:both'>
 		<table style='width:100%'>
